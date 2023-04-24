@@ -24,10 +24,8 @@ Plausible.Billing.Plans.html
 Plausible.Billing.SiteLocker.html
 Plausible.Billing.html
 Plausible.ChangesetHelpers.html
-Plausible.ClickhouseEvent.html
 Plausible.ClickhouseEventV2.html
 Plausible.ClickhouseRepo.html
-Plausible.ClickhouseSession.html
 Plausible.ClickhouseSessionV2.html
 Plausible.ConfigHelpers.html
 Plausible.DataCase.html
@@ -203,8 +201,8 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-FF218DA7.js
-dist/sidebar_items-D09B9F03.js
+dist/search_items-C69FA3C6.js
+dist/sidebar_items-A17A5B48.js
 index.html
 readme.html
 search.html
