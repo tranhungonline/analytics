@@ -5,7 +5,7 @@
   <% end %>
 
   <%= if Application.get_env(:plausible, :environment) == "dev" do %>
-    <script defer data-domain="<%= base_domain() %>" event-logged_in="<%= !!@conn.assigns[:current_user] %>" src="<%="#{plausible_url()}/js/plausible.local.pageview-props.js"%>"></script>
+    <script defer data-domain="<%= base_domain() %>" event-logged_in="<%= !!@conn.assigns[:current_user] %>" src="<%="#{plausible_url()}/js/plausible.local.pageview-props.tagged-events.js"%>"></script>
     <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
   <% end %>
 <% end %>
