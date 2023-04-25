@@ -830,4 +830,26 @@ defmodule PlausibleWeb.Api.StatsController.MainGraphTest do
       assert "__blank__" == List.last(labels)
     end
   end
+
+  describe "GET /api/stats/main-graph - comparisons with specific imported data sets" do
+    setup [:create_user, :log_in, :create_new_site]
+
+    test "hello", %{conn: conn} = context do
+      {:ok, site: site} = add_imported_data(context, ~D[2023-04-29])
+
+      populate_stats(site, [
+        build(:pageview, timestamp: ~N[2023-05-01 00:00:00]),
+        build(:pageview, timestamp: ~N[2023-05-05 00:00:00]),
+        build(:pageview, timestamp: ~N[2023-05-30 00:00:00]),
+        build(:imported_visitors, date: ~D[2023-04-29])
+      ])
+
+      conn
+      |> get(
+        "/api/stats/#{site.domain}/main-graph?period=month&date=2020-05-30&comparison=previous_period"
+      )
+      |> json_response(200)
+      |> IO.inspect(label: :inspect)
+    end
+  end
 end
