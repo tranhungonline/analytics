@@ -102,9 +102,9 @@ defmodule Plausible.Site.Cache do
   @spec refresh_updated_recently(Keyword.t()) :: :ok
   def refresh_updated_recently(opts \\ []) do
     recently_updated_sites_query =
-      from s in sites_by_domain_query(),
+      from [s, mg] in sites_by_domain_query(),
         order_by: [asc: s.updated_at],
-        where: s.updated_at > ago(^15, "minute")
+        where: s.updated_at > ago(^15, "minute") or mg.updated_at > ago(^15, "minute")
 
     refresh(
       :updated_recently,
