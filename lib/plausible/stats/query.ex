@@ -253,7 +253,8 @@ defmodule Plausible.Stats.Query do
     has_imported_data = site.imported_data && site.imported_data.status == "ok"
 
     date_range_overlaps =
-      has_imported_data && !Timex.after?(query.date_range.first, site.imported_data.end_date)
+      has_imported_data &&
+        !Timex.after?(query.date_range.first, site.imported_data.end_date)
 
     no_filters_applied = Enum.empty?(query.filters)
 

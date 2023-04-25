@@ -9,6 +9,7 @@ defmodule Plausible.Stats.Comparisons do
 
   alias Plausible.Stats
 
+  # XXX: should month be valid mode?
   @modes ~w(previous_period year_over_year custom)
   @disallowed_periods ~w(realtime all)
 
@@ -57,7 +58,14 @@ defmodule Plausible.Stats.Comparisons do
   def compare(%Plausible.Site{} = site, %Stats.Query{} = source_query, mode, opts \\ []) do
     if valid_mode?(source_query, mode) do
       opts = Keyword.put_new(opts, :now, Timex.now(site.timezone))
-      do_compare(source_query, mode, opts)
+
+      case do_compare(source_query, mode, opts) do
+        {:ok, comparison_query} ->
+          {:ok, maybe_include_imported(comparison_query, site, opts)}
+
+        {:error, _} = e ->
+          e
+      end
     else
       {:error, :not_supported}
     end
@@ -167,5 +175,20 @@ defmodule Plausible.Stats.Comparisons do
   """
   def valid_mode?(%Stats.Query{period: period}, mode) do
     mode in @modes && period not in @disallowed_periods
+  end
+
+  defp maybe_include_imported(query, site, opts) do
+    has_imported_data = site.imported_data && site.imported_data.status == "ok"
+
+    date_range_overlaps =
+      has_imported_data &&
+        !Timex.after?(query.date_range.first, site.imported_data.end_date)
+
+    no_filters_applied = Enum.empty?(query.filters)
+
+    include_imported =
+      opts[:with_imported] && has_imported_data && date_range_overlaps && no_filters_applied
+
+    %{query | include_imported: !!include_imported}
   end
 end

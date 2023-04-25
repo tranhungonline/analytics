@@ -189,7 +189,9 @@ defmodule PlausibleWeb.Api.StatsController do
     site = conn.assigns[:site]
 
     with :ok <- validate_params(params) do
-      query = Query.from(site, params) |> Filters.add_prefix()
+      query =
+        Query.from(site, params)
+        |> Filters.add_prefix()
 
       comparison_mode = params["comparison"] || "previous_period"
       comparison_opts = parse_comparison_opts(params)
@@ -206,7 +208,8 @@ defmodule PlausibleWeb.Api.StatsController do
         top_stats: top_stats,
         interval: query.interval,
         sample_percent: sample_percent,
-        with_imported: query.include_imported,
+        with_imported:
+          query.include_imported or (comparison_query && comparison_query.include_imported),
         imported_source: site.imported_data && site.imported_data.source,
         comparing_from: comparison_query && comparison_query.date_range.first,
         comparing_to: comparison_query && comparison_query.date_range.last,
@@ -414,7 +417,10 @@ defmodule PlausibleWeb.Api.StatsController do
       end
 
     current_results = Stats.aggregate(site, query, metrics)
-    prev_results = comparison_query && Stats.aggregate(site, comparison_query, metrics)
+
+    prev_results =
+      comparison_query &&
+        Stats.aggregate(site, comparison_query, metrics)
 
     stats =
       [
@@ -1320,7 +1326,8 @@ defmodule PlausibleWeb.Api.StatsController do
     [
       from: params["compare_from"],
       to: params["compare_to"],
-      match_day_of_week?: params["match_day_of_week"] == "true"
+      match_day_of_week?: params["match_day_of_week"] == "true",
+      with_imported: params["with_imported"] == "true"
     ]
   end
 end
