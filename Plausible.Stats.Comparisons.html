@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-A17A5B48.js"></script>
+    <script src="dist/sidebar_items-E1533C88.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -157,16 +157,6 @@ main graph with last month or with the same month from last year.</p>
 
     </div>
 
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#valid_mode?/2" translate="no">valid_mode?(query, mode)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Returns whether the source query and the selected mode support comparisons.</p></div>
-
-    </div>
-
 </div>
 
   </section>
@@ -233,7 +223,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">compare(site, source_query, mode, opts \\ [])</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L57" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L60" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -271,36 +261,8 @@ the week as the source query, rather than on the exact same date. For
 example, if the source query starts on Sunday, January 1st, 2023 and the
 <code class="inline">year_over_year</code> comparison query is configured to <code class="inline">match_day_of_week?</code>,
 it will be shifted to start on Sunday, January 2nd, 2022 instead of
-January 1st. Defaults to false.</p></li></ul>
-  </section>
-</section>
-<section class="detail" id="valid_mode?/2">
-
-  <div class="detail-header">
-    <a href="#valid_mode?/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">valid_mode?(query, mode)</h1>
-
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/comparisons.ex#L168" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> valid_mode?(<a href="Plausible.Stats.Query.html#t:t/0">Plausible.Stats.Query.t</a>(), <a href="#t:mode/0">mode</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()</pre>
-
-      </div>
-
-<p>Returns whether the source query and the selected mode support comparisons.</p><p>For example, the realtime view doesn't support comparisons. Additionally, only
-[&quot;previous_period&quot;, &quot;year_over_year&quot;, &quot;custom&quot;] are supported.</p>
+January 1st. Defaults to false.</p></li><li><p><code class="inline">:include_imported?</code> - includes imported data in the generated comparison
+query if there is imported data. Defaults to true.</p></li></ul>
   </section>
 </section>
 
