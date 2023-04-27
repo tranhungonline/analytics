@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.29.4">
     <meta name="project" content="Plausible v0.0.1">
 
-    <title>Plausible.Site.Domain — Plausible v0.0.1</title>
+    <title>Plausible.Stats.CustomProps — Plausible v0.0.1</title>
     <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
 
 
@@ -102,26 +102,19 @@ Plausible
 </button>
 
 
-    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/domain.ex#L1" title="View Source" class="icon-action" rel="help">
+    <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/custom_props.ex#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Plausible.Site.Domain</span> 
+  <span translate="no">Plausible.Stats.CustomProps</span> 
   <small class="app-vsn" translate="no">(Plausible v0.0.1)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Basic interface for domain changes.</p><p>Once <a href="Plausible.DataMigration.NumericIDs.html"><code class="inline">Plausible.DataMigration.NumericIDs</code></a> schema migration is ready, 
-domain change operation will be enabled, accessible to the users.</p><p>We will set a transition period of 72 hours
-during which, both old and new domains, will be accepted as traffic
-identifiers to the same site. </p><p>A periodic worker will call the <code class="inline">expire/0</code> function to end it where applicable.
-See: <a href="Plausible.Workers.ExpireDomainChangeTransitions.html"><code class="inline">Plausible.Workers.ExpireDomainChangeTransitions</code></a>.</p><p>The underlying changeset for domain change (see: <a href="Plausible.Site.html"><code class="inline">Plausible.Site</code></a>) relies
-on database trigger installed via <code class="inline">Plausible.Repo.Migrations.AllowDomainChange</code>
-Postgres migration. The trigger checks if either <code class="inline">domain</code> or <code class="inline">domain_changed_from</code>
-exist to ensure unicity.</p>
+<p>Module for querying user defined 'custom properties'.</p>
   </section>
 
 
@@ -140,17 +133,23 @@ exist to ensure unicity.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#change/3" translate="no">change(site, new_domain, opts \\ [])</a>
+        <a href="#props_for_all_event_names/2" translate="no">props_for_all_event_names(site, query)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Returns a breakdown of event names with all existing custom
+properties for each event name.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#expire_change_transitions/1" translate="no">expire_change_transitions(expire_threshold_hours \\ 72)</a>
+        <a href="#props_for_goal/2" translate="no">props_for_goal(site, query)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>Expects a single goal filter in the query. Returns a list of custom
+props for that goal. Works for both custom event and pageview goals.</p></div>
 
     </div>
 
@@ -168,18 +167,16 @@ exist to ensure unicity.</p>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="change/3">
-
-    <span id="change/2"></span>
+<section class="detail" id="props_for_all_event_names/2">
 
   <div class="detail-header">
-    <a href="#change/3" class="detail-link" title="Link to this function">
+    <a href="#props_for_all_event_names/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">change(site, new_domain, opts \\ [])</h1>
+    <h1 class="signature" translate="no">props_for_all_event_names(site, query)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/domain.ex#L46" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/custom_props.ex#L14" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -189,28 +186,20 @@ Functions
 
   <section class="docstring">
 
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> change(<a href="Plausible.Site.html#t:t/0">Plausible.Site.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) ::
-  {:ok, <a href="Plausible.Site.html#t:t/0">Plausible.Site.t</a>()} | {:error, <a href="https://hexdocs.pm/ecto/3.9.5/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()}</pre>
-
-      </div>
-
-
+<p>Returns a breakdown of event names with all existing custom
+properties for each event name.</p>
   </section>
 </section>
-<section class="detail" id="expire_change_transitions/1">
-
-    <span id="expire_change_transitions/0"></span>
+<section class="detail" id="props_for_goal/2">
 
   <div class="detail-header">
-    <a href="#expire_change_transitions/1" class="detail-link" title="Link to this function">
+    <a href="#props_for_goal/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">expire_change_transitions(expire_threshold_hours \\ 72)</h1>
+    <h1 class="signature" translate="no">props_for_goal(site, query)</h1>
 
-      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/site/domain.ex#L29" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/plausible/analytics/blob/main/lib/plausible/stats/custom_props.ex#L29" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -220,13 +209,8 @@ Functions
 
   <section class="docstring">
 
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> expire_change_transitions(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()}</pre>
-
-      </div>
-
-
+<p>Expects a single goal filter in the query. Returns a list of custom
+props for that goal. Works for both custom event and pageview goals.</p>
   </section>
 </section>
 

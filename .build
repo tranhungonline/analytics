@@ -92,6 +92,7 @@ Plausible.Stats.Clickhouse.html
 Plausible.Stats.Compare.html
 Plausible.Stats.Comparisons.html
 Plausible.Stats.CurrentVisitors.html
+Plausible.Stats.CustomProps.html
 Plausible.Stats.FilterParser.html
 Plausible.Stats.FilterSuggestions.html
 Plausible.Stats.Filters.html
@@ -201,8 +202,8 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-NKANDIL5.woff2
-dist/search_items-FDA9C3A4.js
-dist/sidebar_items-E1533C88.js
+dist/search_items-AF07EF4F.js
+dist/sidebar_items-14A13173.js
 index.html
 readme.html
 search.html
