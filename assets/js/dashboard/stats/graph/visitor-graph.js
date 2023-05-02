@@ -53,6 +53,7 @@ class LineGraph extends React.Component {
         animation: false,
         plugins: {
           legend: { display: false },
+          datalabels: { display: false},
           tooltip: {
             enabled: false,
             mode: 'index',
